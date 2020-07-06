@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- 这三个对象创建的顺序、默认就按照配置顺序 -->
+<bean id="person" class="com.atguigu.bean.Person"></bean>
+<bean id="car" class="com.atguigu.bean.Car"></bean>
+<bean id="book" class="com.atguigu.bean.Book"></bean>
+
+<!-- 这三个对象创建的顺序改变、指定先创建的对象 -->
+<bean id="car1" class="com.atguigu.bean.Car" depends-on="person1,book1"></bean>
+<bean id="person1" class="com.atguigu.bean.Person"></bean>
+<bean id="book1" class="com.atguigu.bean.Book"></bean>
+
+
+<!-- bean的作用域(默认单实例）、单实例与多实例的bean -->
+<!-- singleton:单例、prototype:多实例额、request：web环境同一次请求创建一个实例、session：web同一次会话创建一个实例-->
+<bean id="boook" class="com.atguigu.bean.Book" scope="prototype">
+	
+
+</bean>
+
+
+<!-- 工厂模式创建对象：AirPlaneFactory.getAirPlane("白击掌"); -->
+
+<bean id="airPlane01" class="com.atguigu.factory.AirPlaneStaticFactory" factory-method="getAirPlane">
+	<!-- constructor-arg用于传参 -->
+	<constructor-arg value="白击掌"></constructor-arg>
+</bean>
+
+<!-- 实例工厂:先创建实例工厂对象、再配置要创建的AirPlane使用哪个工厂创建 -->
+<bean class="com.atguigu.factory.AirPlaneInstanceFactory" id="airPlaneInstanceFactory" ></bean>
+
+<bean id = "airPlane02" class="com.atguigu.bean.AirPlane" 
+	factory-bean="airPlaneInstanceFactory" 
+	factory-method="getAirPlane">
+	<constructor-arg name="jzName" value="实例击掌"></constructor-arg>
+</bean>
+
+<!-- FactoryBean是Spring规定的一个接口:只要是实现了这个接口的实现类、Spring都认为是一个工厂 -->
+<!--  ioc启动的时候不会创建这个对象实例 -->
+<bean class="com.atguigu.factory.MyFactoryBeanImple" id="myFactoryBeanImple">
+<!-- 	Spring会自动创建对象 -->
+
+</bean>
+
+</beans>

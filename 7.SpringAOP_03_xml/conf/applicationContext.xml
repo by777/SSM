@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+
+		<!-- 开启基于注解的AOP功能
+		<context:component-scan base-package="com.atguigu"></context:component-scan>
+		1.将目标类和切面类加入到IOC容器中@Component
+		2.告诉Spring哪个是切面类 @Aspect() 
+		3.在切面类中使用5个通知注解来配置切面中的这些通知方法都何时何地运行
+		4.开启基于注解的AOP功能
+		<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+		 -->
+ 
+<!-- 1/基于配置的AOP，加入IOC -->
+<bean class="com.atguigu.impl.MyMathCalculator" id="myMathCalculator"></bean>
+<bean class="com.atguigu.util.ValidateApsect" id="validateApsect"></bean>
+<bean class="com.atguigu.util.LogUtils" id="logUtils"></bean>
+<!-- 2、需要AOP名称空间 -->
+<aop:config>
+	<aop:pointcut expression="execution(* com.atguigu.impl.*.*(..))" id="globalPoint"/>
+	
+	
+	<!-- 指定切面 -->
+	<aop:aspect ref="logUtils">
+		<!-- 为了方便引用表达式 -->
+		<aop:pointcut expression="execution(* com.atguigu.impl.*.*(..))" id="myPoint"/>
+		<!-- 配置哪个方法是前置通知 -->
+		<aop:before method="logStart" pointcut-ref="myPoint"/>
+		<!-- 有个返回值不写会报错 -->
+		<aop:after-returning method="logReturn" pointcut="execution(* com.atguigu.impl.*.*(..))" returning="result"/>
+		<aop:after-throwing method="logException" pointcut-ref="myPoint" throwing="e"/>
+		<aop:after method="logEnd" pointcut-ref="myPoint" />
+		<aop:around method="myAround" pointcut-ref="globalPoint"/>
+	</aop:aspect>
+	
+	<aop:aspect ref="validateApsect">
+		<aop:before method="logStart" pointcut-ref="globalPoint"/>
+		<aop:after-returning method="logReturn" pointcut="execution(* com.atguigu.impl.*.*(..))" returning="result"/>
+		<aop:after-throwing method="logException" pointcut-ref="myPoint" throwing="e"/>
+		<aop:after method="logEnd" pointcut-ref="globalPoint" />
+	</aop:aspect>
+	
+</aop:config>
+		<!----------------------------
+		注解：快速方便
+		配置：功能完善，重要的配置、不重要的注解 
+		------------------------------>
+
+</beans>

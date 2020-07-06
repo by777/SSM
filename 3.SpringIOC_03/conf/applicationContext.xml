@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+<!-- 
+通过注解分别创建Dao Service Controller :
+给bean加注解、快速的将bean加入到IOC
+Spring的4个注解 
+	@Controller、控制网站跳转逻辑
+	@Service 业务逻辑层二点组件
+	@Repository 给数据库层 dao层 持久化层
+	@Component 不属于以上的组件 如WebUtils
+注解可以随便加 Spring底层不会去验证 
+使用注解 把组件快速的加入组件中步骤：
+ 1）组件加注解
+ 2）告诉Spring自动扫描注解：依赖context名称空-》扫描base-package下所有加了注解的类
+	3)导入AOP包，支持注解模式加入IOC
+	4）使用注解和使用配置加 行为都是一样的 作用域默认单实例
+-->
+<!-- <context:component-scan base-package="com.atguigu"></context:component-scan> -->
+
+<!-- 加别人的注解 
+<bean class="org.apache.commons.logging.impl.Jdk14Logger"></bean>
+-->
+<!-- 扫描的时候排除 -->
+<!-- <context:component-scan base-package="com.atguigu">
+	
+	排除  type="annotation" 指定排除规则	
+	annotation：标定了指定注解的不要 
+	expression：org.springframework.stereotype.Controller注解的全类名
+	aspectj:aspectj表达式
+	assignable:指定排除某个具体类
+	custom:自定义实现TypeFilter接口，决定哪些要
+	regex:正则匹配	
+	
+	<context:include-filter type="annotation" expression=""/>
+	
+
+</context:component-scan> -->
+
+<!-- <context:component-scan base-package="com.atguigu" use-default-filters="false">
+	只扫描进入哪些组件默认都是全扫描进来.需要 use-default-filters="false"
+	<context:include-filter type="annotation" expression=""/>
+</context:component-scan> -->
+
+
+<!-- DI ====Auto wired=======依赖注入 -->
+<context:component-scan base-package="com.atguigu">
+	
+
+</context:component-scan>
+
+</beans>

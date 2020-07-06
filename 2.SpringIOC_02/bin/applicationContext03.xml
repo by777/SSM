@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="car" class="com.atguigu.bean.Car"> 
+	<property name="carName" value="找到了我"></property>
+	<property name="color" value="white"></property>
+</bean>
+
+
+<!-- 为person里面的自定义类型赋值 、proterty：手动赋值-->
+<!-- autowire="default" / no: 不自动装配 
+	private Car car
+	autowire="byName":以属性名(car)作为id去容器中找到一个组件给他赋值
+		byType:以类型、有多个会报错
+		constructor:1、先按照有参构造器的类型装配、没有就直接null、2如果按照类型有多个，参数的名作为id继续匹配装配、找不到装配null
+		no
+
+-->
+<bean id="person" class="com.atguigu.bean.Person" autowire="byType">
+	<!-- <property name="car" ref="car"></property> -->
+
+</bean>
+
+<bean id="book01" class="com.atguigu.bean.Book">
+	<property name="bookName" value="book01"></property>
+</bean>
+
+<bean id="book02" class="com.atguigu.bean.Book">
+	<property name="bookName" value="book02"></property>
+</bean>
+
+<bean id="book03" class="com.atguigu.bean.Book">
+	<property name="bookName" value="book03"></property>
+</bean>
+
+<!-- SpEL:Spring Expression Language -->
+<bean id="person04" class="com.atguigu.bean.Person">
+<!-- 	1字面量${}; SpEL#{} -->
+	<property name="age" value="#{12*5}"></property>
+	<property name="salary" value="#{12345.67*12}"></property>
+	<!-- 2获取某个属性值 -->
+	<property name="lastName" value="#{book01.bookName}"></property>
+	<!-- 3=ref -->
+	<property name="car" value="#{car}"></property>
+	<!-- 4调用静态方法、非静态方法  #{T(全类名).静态方法名(arg1,agr2)}-->
+	<property name="email" value="#{T(java.util.UUID).randomUUID().toString().substring(0,5)}@qq.com"></property>
+	<!-- 调用非静态方法 -->
+	<property name="gender" value="#{book01.getBookName()}"></property>
+</bean>
+	
+</beans>

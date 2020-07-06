@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+<!-- 正确的为复杂属性赋值 null 引用类型bean 集合类赋值 -->
+<!-- 默认引用类型null ，复杂赋值要在property里-->
+
+
+
+<bean class="com.atguigu.bean.Car" id="car01">
+<property name="carName" value="Benci"></property>
+<property name="color" value="red"></property>
+<property name="price" value="100000"></property>
+</bean>
+
+<bean name="book" class="com.atguigu.bean.Book" id="book01">
+<property name="bookName" value="三国"></property>
+</bean>
+
+<bean id="person01" class="com.atguigu.bean.Person">
+
+<property name="lastName">
+<!-- 没有默认值就null -->
+
+<!-- 不能直接value=null -->
+<null/>
+</property>
+
+	<!--1、 引用car ref:= car=ioc.getBean("car")引用外部bean ref="car01"-->
+	<property name="car" >
+	<!-- 2、使用bean标签 -->
+		<bean class="com.atguigu.bean.Car">
+			<property name="carName" value="baoma"></property>
+			<property name="color" value="green"></property>
+			<property name="price" value="12333"></property>
+		</bean>
+	</property>
+</bean>
+
+
+<bean id="person02" class="com.atguigu.bean.Person">
+<!-- books是list books=new ArrayList<Book>() -->
+<property name="books">
+
+	<list>
+		<bean class="com.atguigu.bean.Book" p:bookName="西游记" id="book001"></bean>
+		<ref bean="book01"/>
+	</list>
+
+</property>
+
+<property name="maps">
+	<map>
+		<entry key="key01" value="01"></entry>
+		<entry key="key02" value="02"></entry>
+		<entry key="key03" value-ref="book01"></entry>
+		<entry key="key04">
+			<bean class="com.atguigu.bean.Car">
+				<property name="carName" value="maibahe"></property>
+			</bean>
+		</entry>
+		<entry key="key05">
+			<map>
+				<entry key="key05-1" value="05-1"></entry>
+			</map>		
+		</entry>	
+	</map>
+</property>
+
+<property name="properties">
+	<props>
+		<prop key="username">root</prop>
+		<prop key="password">admin</prop>
+	</props>
+</property>
+</bean>
+
+<util:map id="myMap">	
+		<entry key="myMap1" value="myMap_1"></entry>		
+</util:map>
+
+<!-- util名称空间创建集合类型的bean 方便引用内部bean-->
+<bean class="com.atguigu.bean.Person" id="person03">
+	<property name="maps" ref="myMap"></property>
+</bean>
+
+
+<!-- 级联属性赋值 Person->Car->carName就是级联属性 -->
+
+<bean name="person04" class="com.atguigu.bean.Person" >
+	<property name="car" ref="car01"></property>
+	<!-- 为car赋值的时候为car改价格 -->
+	<property name="car.price" value="10000000000000"></property>
+</bean>
+	
+	<bean class="com.atguigu.bean.Person" id="person05">
+		<property name="lastName" value="耳仔"></property>
+		<property name="age" value="12"></property>
+		<property name="gender" value="女"></property>
+		<property name="email" value="1qwe!@qq.com"></property>	
+	</bean>
+	
+	
+	<!-- 指定配置信息继承对象 -->
+	<bean id="person06" class="com.atguigu.bean.Person" parent="person05">
+	<property name="lastName" value="三载"></property>
+	<!-- 其他属性继承person05 class也可以去掉-->	
+	</bean>
+	
+	
+	<!-- 此对象只能用于被继承 -->
+	<bean class="com.atguigu.bean.Person" id="person00" abstract="true">
+		<property name="lastName" value="无名"></property>
+		<property name="age" value="0"></property>
+		<property name="gender" value="不明确"></property>
+		<property name="email" value="something@abc"></property>	
+	</bean>
+	
+	
+	
+
+</beans>

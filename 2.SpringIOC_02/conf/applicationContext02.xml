@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+<!-- 数据库连接池作为单实例是最好的、一个项目就一个连接池。 让spring管理连接池-->
+
+<!-- <bean id="dataSoure" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<property name="user" value="root"></property>
+	<property name="password" value="mypassword"></property>
+	<property name="jdbcUrl" value="jdbc:mysql://192.168.1.108:3306/spring?characterEncoding=utf8"></property>
+	<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+
+</bean> -->
+
+<context:property-placeholder location="classpath:dbconfig.properties"/>
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+<!-- 引用外部属性文件  以依赖context名称空间 classpath:表示类路径下一个资源-->
+	<!-- username是spring中的一个关键字，不能用username -->
+	<property name="user" value="${jdbc.username}"></property>
+	<property name="password" value="${jdbc.password}"></property>
+	<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+	<property name="driverClass" value="${jdbc.driverClass}"></property>
+
+</bean>
+</beans>

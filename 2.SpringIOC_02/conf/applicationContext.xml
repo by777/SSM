@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 创建带有生命周期的bean -->
+
+<bean class="com.atguigu.bean.Book" id="book01" destroy-method="myDestory" init-method="myInit" scope="singleton">
+</bean>
+
+<!-- 后置处理器接口可以在bean初始化前后调用方法 -->
+<bean class="com.atguigu.bean.MyBeanPostProcessor" id="myBeanPostProcessor"></bean>
+
+
+
+</beans>

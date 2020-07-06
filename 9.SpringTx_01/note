@@ -1,0 +1,24 @@
+编程式事务：
+	TransactionFilter{
+		try{
+			// 获取链接
+			// 设置非自动提交
+			chain.doFilter();
+			// 提交
+		}catch(Exception e){
+			// rollback
+		
+		}finally{
+			//close
+		}
+	}
+
+声明式事务：
+	告诉Spring哪个方法是事务即可
+	
+事务的4个关键属性（ACID）
+	原子性atomicity ----------- 不可再分
+	一致性consistency --------- 针对业务逻辑性的数据的一致 要更新都更新、回滚都回滚
+	隔离性isolation ------------ 并发执行过程中不会互相干扰
+	持久性durability ------------- 对数据的修改永久的保存下来
+		
