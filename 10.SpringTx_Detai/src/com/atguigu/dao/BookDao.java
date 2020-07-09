@@ -28,4 +28,11 @@ public class BookDao {
 		String sql = "UPDATE book_stock SET stock=stock-1 WHERE isbn=?";
 		jdbcTemplate.update(sql,isbn);
 	}
+	
+	/*改图书价格*/
+	public void updatePrice(String isbn,int price){
+		String sql = "UPDATE book SET price =？ WHERE isbn=?";
+		jdbcTemplate.update(sql,price,isbn);
+		
+	}
 }
