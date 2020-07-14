@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>1.SpringMVC_helloWorld</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 前端控制器DispatchServlet拦截所有请求 -->
+  <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+		<!-- contextConfigLocation指定Spring MVC配置文件位置 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc.xml</param-value>
+		</init-param>
+		<!-- servlet启动加载 ,servlet原本是启动加载，
+		load-on-startup会在服务器启动时候加载
+		值越小，优先级越高-->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<!-- /*和/拦截所有请求 但/*拦截范围更大（会拦截jsp） ，所以用/-->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
