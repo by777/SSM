@@ -13,6 +13,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 		<!-- contextConfigLocation指定Spring MVC配置文件位置 -->
+		<!-- 如果不指定就会默认去web-inf下找springDispatcherServlet-servlet.xml文件 -->
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:springmvc.xml</param-value>
 		</init-param>
@@ -25,7 +26,8 @@
 	<!-- Map all requests to the DispatcherServlet for handling -->
 	<servlet-mapping>
 		<servlet-name>springDispatcherServlet</servlet-name>
-		<!-- /*和/拦截所有请求 但/*拦截范围更大（会拦截jsp） ，所以用/-->
+		<!-- /* 和 / 拦截所有请求 但 /* 拦截范围更大（会拦截jsp） ，所以用 / -->
+		<!-- 但是用/ 不拦截jsp也会拦截html -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
