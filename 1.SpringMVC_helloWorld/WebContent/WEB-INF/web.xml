@@ -27,7 +27,9 @@
 	<servlet-mapping>
 		<servlet-name>springDispatcherServlet</servlet-name>
 		<!-- /* 和 / 拦截所有请求 但 /* 拦截范围更大（会拦截jsp） ，所以用 / -->
-		<!-- 但是用/ 不拦截jsp也会拦截html -->
+		<!-- 但是用/ 虽然不拦截jsp但也还是会拦截html -->
+		<!-- / 是把大web.xml的default重写了 
+		/* 直接拦截所有请求 -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>

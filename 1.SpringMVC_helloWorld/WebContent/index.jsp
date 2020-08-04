@@ -8,5 +8,10 @@
 </head>
 <body>
 <a href="hello">Hello。</a>
+<hr/>
+<h1>@RequestMapping-Ant风格url模糊匹配。</h1>
+<a href="antTest01">精确匹配/antTest01</a>
+<br>
+<a href="antTest02">*匹配/antTest0?</a>
 </body>
 </html>

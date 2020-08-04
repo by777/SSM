@@ -9,6 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MyFirstController {
 	// 斜杠代表从当前项目下开始，省略也一样默认从当前项目下开始的
+	/*ResultMapping的其它属性
+	 * @RequestMapping(value="/hello",method=RequestMethod.GET,params={"username=bai1",password})
+	 * 
+	 * method:限定请求方式\GET\POST\PUT\PATCH\DELETE\OPTIONS
+	 * 	不按规定请求会报错4xx：客户端错误
+	 * 
+	 * params:规定请求参数：
+	 * 	param1:表示请求必须包含名为param1的参数
+	 * 	！parame1：表示请求名不能包含param1的请求参数
+	 * 	param1 != value1:包含param1但值不能维value
+	 * 	“param1=value1","param2"}:必须包含12，且1为value
+	 * 	eg.
+	 * 	params={"username"}；请求必须带上username没带会404
+	 * 	在发送请求的链接 如果?username= 则为空串 如果？则为Null
+	 * 
+	 * headers:和params一样可以写简单的表达式：
+	 * 	headers={"User-Agent=......firefox"}
+	 * 
+	 * consumes:直接收内容类型是哪种的请求，规定请求头中的Content-Type
+	 * 
+	 * produces:告诉浏览器返回内容类型是什么，给响应头中加上Content-Type
+	 * 
+	 * */
 	@RequestMapping("/hello")
 	public String myfirstRequest() {
 		System.out.println("请求收到了正在处理中");
