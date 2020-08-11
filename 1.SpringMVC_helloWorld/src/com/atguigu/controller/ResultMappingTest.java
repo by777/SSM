@@ -1,6 +1,7 @@
 package com.atguigu.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -19,7 +20,7 @@ public class ResultMappingTest {
 		return "success";
 	}
 	
-	/*0+一个字符（/和？都不行*/）
+	/*0+一个字符（/和？都不行）*/
 	@RequestMapping("/antTest0?")
 	public String antTest02(){
 		return "success";
@@ -27,6 +28,13 @@ public class ResultMappingTest {
 	
 	@RequestMapping("/antTest0*")
 	public String antTest03(){
+		return "success";
+	}
+	
+	@RequestMapping("/user/{id}*")
+	// 路径上的占位符只能占一层路径
+	public String pathVariableTest(@PathVariable("id")String id){
+		System.out.println(id);
 		return "success";
 	}
 }

@@ -13,5 +13,18 @@
 <a href="antTest01">精确匹配/antTest01</a>
 <br>
 <a href="antTest02">*匹配/antTest0?</a>
+
+
+<hr/>
+<h1>PathVariable匹配url变量</h1>
+<a href="user/admin">发送请求：user/admin</a>
+<br>
+<a href="user/root">发送请求：user/root</a>
+<br>
+<a href="user/root1">发送请求：user/root1 </a>
+<br>
+<a href="user/root1/">发送请求：user/root1/ 跟上面一样</a>
+<br>
+<a href="user/root1/1111">发送请求：user/root1/1111 会报404</a>
 </body>
 </html>
