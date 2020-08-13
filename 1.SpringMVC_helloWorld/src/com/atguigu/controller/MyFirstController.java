@@ -1,6 +1,8 @@
 package com.atguigu.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /*
@@ -39,6 +41,23 @@ public class MyFirstController {
 		return "success";// 自动转发到success页面，地址栏仍然是hello请求
 		// 注意是转发request.getRequestDispatcher("/test.jsp").forword(request,response);
 		// 不是重定向response.sendRedirect("/test.jsp");
-
+	}
+	/*SpringMVC获取请求带来的各种信息
+	 * @RequestParam: 获取请求参数
+	 * @RequestHeader: 请求头中某个key的值
+	 * @CookieValue: 获取某个cookie值
+	 * 
+	 * @PathVariable:获取路径上的占位符
+	 * @RequestParam:获取？后面的值
+	 * 
+	 * */
+	// 或者明确的指定@RequestParam(value="user",request=True,defaultValue="")
+	@RequestMapping("/handle02")// 名称相同可以直接接收，发送时不带就是null	
+	public String handle02(String username,@RequestHeader("User-Agent")String userAgent,
+		@CookieValue("JSESSIONID") String jid){
+		System.out.println(username);
+		System.out.println(userAgent);
+		System.out.println(jid);
+		return "success";
 	}
 }

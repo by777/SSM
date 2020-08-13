@@ -26,5 +26,9 @@
 <a href="user/root1/">发送请求：user/root1/ 跟上面一样</a>
 <br>
 <a href="user/root1/1111">发送请求：user/root1/1111 会报404</a>
+
+
+<br>
+<a href="handle02?username=tomcat">发送请求handle?username=tomcat：带有参数</a>
 </body>
 </html>
