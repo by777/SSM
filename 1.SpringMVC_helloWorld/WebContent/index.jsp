@@ -30,5 +30,14 @@
 
 <br>
 <a href="handle02?username=tomcat">发送请求handle?username=tomcat：带有参数</a>
+<hr>
+<form action="book" method="post">
+书名：<input type="text" value="" name="bookName">
+作者：<input type="text" value="" name="author">
+价格：<input type="text" value="" name="price">
+库存：<input type="text" value="" name="stock">
+销量：<input type="text" value="" name="sales">
+<input type="submit">
+</form>
 </body>
 </html>

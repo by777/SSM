@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.atguigu.book.Book;
+
 /*
  * Step1.告诉Spring这是一个处理器可以处理请求@Controller
  * */
@@ -58,6 +60,12 @@ public class MyFirstController {
 		System.out.println(username);
 		System.out.println(userAgent);
 		System.out.println(jid);
+		return "success";
+	}
+	@RequestMapping("/book")
+	public String handle03(Book book){
+		System.out.println("-book--");
+		System.out.println("我要保存的图书："+book);
 		return "success";
 	}
 }
