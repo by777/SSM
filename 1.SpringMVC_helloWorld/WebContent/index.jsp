@@ -37,7 +37,16 @@
 价格：<input type="text" value="" name="price">
 库存：<input type="text" value="" name="stock">
 销量：<input type="text" value="" name="sales">
+<hr>作者地址：
+省：<input type="text" value="" name="address.province">
+市：<input type="text" value="" name="address.city">
+街道：<input type="text" value="" name="address.street">
 <input type="submit">
+提交的请求可能有乱码：
+乱码分为
+请求乱码、GET改server.xml:URIEncoding="UTF-8"
+POST:在第一次请求参数之前设置request.setCharacterEncoding("UTF-8")\修改characterEncodingFilter
+响应乱码:response.setContentType("text/html;charset=utf-8")
 </form>
 </body>
 </html>

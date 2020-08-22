@@ -9,9 +9,23 @@ public class Book {
 	private Double price;
 	private Integer stock;
 	private Integer sales;
+	private Address address;
 	// 一定有无参构造器
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	public String getBookName() {
 		return bookName;
+	}
+	@Override
+	public String toString() {
+		return "Book [bookName=" + bookName + ", author=" + author + ", price="
+				+ price + ", stock=" + stock + ", sales=" + sales
+				+ ", address=" + address + "]";
+	}
+	public Address getAddress() {
+		return address;
 	}
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
@@ -40,9 +54,6 @@ public class Book {
 	public void setSales(Integer sales) {
 		this.sales = sales;
 	}
-	@Override
-	public String toString() {
-		return "Book [bookName=" + bookName + ", author=" + author + ", stock="
-				+ stock + ", sales=" + sales + "]";
-	}
+
+
 }
